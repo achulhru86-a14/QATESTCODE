@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - HarshithaAndCo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-content">
+            <h1 class="navbar-title">HarshithaAndCo</h1>
+            <div class="navbar-user">
+                <span class="user-email">{{ user_email }}</span>
+                <a href="{{ url_for('logout') }}" class="btn-logout">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <div class="dashboard-content">
+            <h2>Welcome to Dashboard!</h2>
+            <p>You are logged in as: <strong>{{ user_email }}</strong></p>
+            
+            <div class="welcome-box">
+                <h3>Dashboard Information</h3>
+                <p>This is your personal dashboard. You can add more features here such as:</p>
+                <ul>
+                    <li>User profile management</li>
+                    <li>Activity logs</li>
+                    <li>Settings and preferences</li>
+                    <li>Data analytics</li>
+                </ul>
+            </div>
+
+            <div class="stats-box">
+                <h3>Quick Statistics</h3>
+                <div class="stat-item">
+                    <span class="stat-label">Status:</span>
+                    <span class="stat-value">Active</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Login Time:</span>
+                    <span class="stat-value" id="login-time"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Display current time
+        const now = new Date();
+        document.getElementById('login-time').textContent = now.toLocaleString();
+    </script>
+</body>
+</html>

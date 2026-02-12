@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders - HarshithaAndCo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-content">
+            <h1 class="navbar-title">HarshithaAndCo</h1>
+            <div class="navbar-user">
+                <span class="user-email">{{ user_email }}</span>
+                <a href="{{ url_for('logout') }}" class="btn-logout">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <div class="dashboard-content">
+            <h2>Order History</h2>
+            <p>Logged in as: <strong>{{ user_email }}</strong></p>
+            
+            <div class="orders-warning">
+                <p><strong>SECURITY WARNING:</strong> This page contains sensitive order information and user data. 
+                If you can see this page after logging out, it indicates a security vulnerability in session management.</p>
+            </div>
+
+            <div class="orders-container">
+                <h3>Your Orders</h3>
+                <table class="orders-table">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Order Date</th>
+                            <th>Total Amount</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in orders %}
+                        <tr>
+                            <td>{{ order.id }}</td>
+                            <td>{{ order.date }}</td>
+                            <td>{{ order.total }}</td>
+                            <td><span class="status-badge status-{{ order.status.lower() }}">{{ order.status }}</span></td>
+                            <td><a href="#" class="btn-view">View Details</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="sensitive-data">
+                <h3>Sensitive Account Information</h3>
+                <div class="info-box">
+                    <p><strong>Credit Card on File:</strong> **** **** **** 4532</p>
+                    <p><strong>Billing Address:</strong> 123 Main Street, City, State 12345</p>
+                    <p><strong>Shipping Address:</strong> 456 Elm Avenue, City, State 12345</p>
+                    <p><strong>Account Balance:</strong> $150.25</p>
+                    <p><strong>Loyalty Points:</strong> 2,450 points</p>
+                </div>
+            </div>
+
+            <div class="navigation-links">
+                <a href="{{ url_for('dashboard') }}" class="btn-link">Back to Dashboard</a>
+                <a href="{{ url_for('account') }}" class="btn-link">View Account</a>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .orders-warning {
+            background-color: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 20px 0;
+            color: #856404;
+        }
+
+        .orders-container {
+            margin: 30px 0;
+        }
+
+        .orders-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .orders-table thead {
+            background-color: #f8f9fa;
+            border-bottom: 2px solid #dee2e6;
+        }
+
+        .orders-table th {
+            padding: 12px;
+            text-align: left;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .orders-table td {
+            padding: 12px;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .orders-table tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        .status-badge {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.85em;
+        }
+
+        .status-delivered {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .status-processing {
+            background-color: #d1ecf1;
+            color: #0c5460;
+        }
+
+        .status-shipped {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .btn-view {
+            background-color: #007bff;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.9em;
+            transition: background-color 0.3s;
+        }
+
+        .btn-view:hover {
+            background-color: #0056b3;
+        }
+
+        .sensitive-data {
+            background-color: #ffebee;
+            border-left: 4px solid #f44336;
+            padding: 20px;
+            border-radius: 4px;
+            margin: 30px 0;
+        }
+
+        .sensitive-data h3 {
+            color: #c62828;
+            margin-top: 0;
+        }
+
+        .info-box {
+            background-color: white;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+
+        .info-box p {
+            margin: 10px 0;
+            color: #333;
+        }
+
+        .navigation-links {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .btn-link {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 0 10px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-link:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</body>
+</html>
